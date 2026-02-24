@@ -9,7 +9,7 @@ Create a simple program that gathers user's data:
 
 Based on this user data, decide if user is old enough to drive and vote in their country:
  - Example input: 
-   - bith date DD/MM/YYYY: 01.02.2000
+   - birthdate DD/MM/YYYY: 01.02.2000
    - name: Ion Ionescu
    - country: Romania
 
