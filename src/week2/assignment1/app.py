@@ -1,41 +1,37 @@
-from asyncio import wait
+from contact_manager import add_contact, display_all_contacts, search_contacts
 
-from contact_manager import adauga_Contact, afiseaza_Toate_Contactele, cauta_Contacte
-
-def exemplu_Meniu():
-    adauga_Contact("Raul", "0785642312", email="raul@gmail.com")
-    adauga_Contact("Andreea", "0783423412", email="andreea@email.com")
+if __name__ == "__main__":
+    add_contact("Raul", "0785642312", email="raul@gmail.com")
+    add_contact("Andreea", "0783423412", email="andreea@email.com")
 
     while True:
-        print("=== Manger de Contacte ===")
-        print("1. Adauga contact ")
-        print("2. Afiseaza contacte ")
-        print("3. Cauta contact ")
-        print("4. Exit ")
+        print("=== Contact Manager ===")
+        print("1. Add contact")
+        print("2. Display contacts")
+        print("3. Search contact")
+        print("4. Exit")
 
-        optiune = input("Alege o optiune: ")
-        if optiune == "1":
-            nume = input("Nume: ")
-            telefon = input("Telefon: ")
-            email = input("Email (optional): ")
+        choice: str = input("Choose an option: ")
+
+        if choice == "1":
+            name: str = input("Name: ")
+            phone: str = input("Phone: ")
+            email: str = input("Email (optional): ")
             if email:
-                adauga_Contact(nume, telefon, email=email)
+                add_contact(name, phone, email=email)
             else:
-                adauga_Contact(nume, telefon)
+                add_contact(name, phone)
 
-        elif optiune == "2":
-            afiseaza_Toate_Contactele()
+        elif choice == "2":
+            display_all_contacts()
 
-        elif optiune == "3":
-            termen = input("Introdu inceputul numelui sau telefonului pt. cautare: ")
-            cauta_Contacte(termen)
+        elif choice == "3":
+            term: str = input("Enter the start of the name or phone to search: ")
+            search_contacts(term)
 
-        elif optiune == "4":
-            print("Iesire")
+        elif choice == "4":
+            print("Exiting...")
             break
 
         else:
-            print("=== Optiune invalida ===")
-
-if __name__ == "__main__":
-        exemplu_Meniu()
+            print("=== Invalid option ===")

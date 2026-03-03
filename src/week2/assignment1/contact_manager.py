@@ -1,46 +1,48 @@
-contacte = []
+contacts: list[dict] = []
 
-def afiseaza_Detalii_Contact(contact: dict):
+def display_contact_details(contact: dict):
     print("=" * 20)
     for key, value in contact.items():
         print(f"{key}: {value}")
     print("=" * 20)
 
-def adauga_Contact(nume: str, telefon: str, **kwargs):
-    contact_Nou = {'nume': nume, 'telefon': telefon}
-    contact_Nou.update(kwargs)
-    contacte.append(contact_Nou)
-    print(f"Contactul {nume} a fost adaugat cu succes. \n")
+def add_contact(name: str, phone: str, **kwargs):
+    new_contact: dict = {'name': name, 'phone': phone}
+    new_contact.update(kwargs)
+    contacts.append(new_contact)
+    print(f"Contact {name} was added successfully. \n")
 
-def afiseaza_Toate_Contactele(sort_key: str = 'nume',reverse: bool = False):
-    if (len(contacte) == 0):
-        print("Lista de contacte e goala. \n");
+def display_all_contacts(sort_key: str = 'name', reverse: bool = False):
+    if (len(contacts) == 0):
+        print("Contact list is empty. \n")
         return
 
-    contacte_Sortate = sorted(contacte, key=lambda k: k.get(sort_key, ''), reverse=reverse)
-    print(f"=== Lista contacte sortate dupa {sort_key} === \n")
-    for c in contacte_Sortate:
-        afiseaza_Detalii_Contact(c)
+    sorted_contacts: list[dict] = sorted(contacts, key=lambda k: k.get(sort_key, ''), reverse=reverse)
+    print(f"=== Contact list sorted by {sort_key} === \n")
+    for c in sorted_contacts:
+        display_contact_details(c)
     print("=" * 20)
 
-def cauta_Contacte(*args, **kwargs):
-    rezultate = []
+def search_contacts(*args, **kwargs):
+    results: list[dict] = []
     if args:
         for term in args:
-            for c in contacte:
-                if c['nume'].startswith(term) or c['telefon'].startswith(term):
-                    if c not in rezultate:
-                        rezultate.append(c)
+            for c in contacts:
+                if c['name'].startswith(term) or c['phone'].startswith(term):
+                    if c not in results:
+                        results.append(c)
 
     if kwargs:
         for key, value in kwargs.items():
-            for c in contacte:
+            for c in contacts:
                 if c.get(key) == value:
-                    if c not in rezultate: rezultate.append(c)
+                    if c not in results: results.append(c)
 
-    print("==== Rezultate cautare ===")
-    if not rezultate:
-        print("Nu s au gasit rezultate. \n");
-    for r in rezultate:
-        afiseaza_Detalii_Contact(r)
+    print("==== Search results ===")
+    if not results:
+        print("No results found. \n")
+    for r in results:
+        display_contact_details(r)
 
+if __name__ == "__main__":
+    pass
