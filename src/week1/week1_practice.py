@@ -1,35 +1,33 @@
 from datetime import datetime
 
-data_Nastere: str = input("Data nastere: DD/MM/YYYY: ")
-nume: str = input("Nume: ")
-tara: str = input("Tara: ")
+if __name__ == "__main__":
+    birth_date: str = input("birthdate dd/mm/yyyy: ")
+    name: str = input("name: ")
+    country: str = input("country: ")
 
-parti: list[str] = data_Nastere.replace('.','/').split('/')
+    parts: list[str] = birth_date.replace('.', '/').split('/')
+    is_valid_format: bool = len(parts) == 3 and all([p.isdigit() for p in parts])
 
-
-este_format_valid: bool = len(parti) == 3 and all([p.isdigit() for p in parti])
-
-if(not este_format_valid):
-    print("Data nastere trebuie sa fie valida! (DD/MM/YYYY)\n")
-else:
-    zi, luna, an = [int(p) for p in parti]
-    if(not (1 <= luna <= 12) or not (1<= zi <= 31) or an < 1900):
-        print("Data nastere trebuie sa fie valida! (Ziua 1-31), Luna(1-12), An(>1900).\n")
+    if not is_valid_format:
+        print("birth date must be valid! (dd/mm/yyyy)\n")
     else:
-        an_Curent: int = datetime.now().year
-        varsta: int = an_Curent - an;
-        varsta_Major: int = 18
-
-        mesaje_Output: list[str] = [
-            f"* Bravo, {nume}, legal ai voie sa {actiune} in {tara}!\n"
-            for actiune, limita in [("votezi", varsta_Major), ("conduci", varsta_Major)]
-            if varsta >= limita
-        ]
-
-        if mesaje_Output:
-            [print(mesaj) for mesaj in mesaje_Output]
+        day, month, year = [int(p) for p in parts]
+        if not (1 <= month <= 12) or not (1 <= day <= 31) or year < 1900:
+            print("birth date must be valid! (day 1-31, month 1-12, year > 1900).\n")
         else:
-            print(f"Din pacate, {nume}, esti prea tanar!")
+            now: datetime = datetime.now()
+            has_birthday_passed: bool = (now.month, now.day) >= (month, day)
+            age: int = now.year - year if has_birthday_passed else now.year - year - 1
 
-if __name__ == '__main__':
-    pass
+            legal_age: int = 18
+
+            output_messages: list[str] = [
+                f"* congratulations, {name}, you are old enough to {action} in {country}!\n"
+                for action, limit in [("vote", legal_age), ("drive", legal_age)]
+                if age >= limit
+            ]
+
+            if output_messages:
+                [print(message) for message in output_messages]
+            else:
+                print(f"unfortunately, {name}, you are too young!")
