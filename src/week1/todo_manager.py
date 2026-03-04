@@ -11,9 +11,12 @@ if __name__ == "__main__":
         choice: str = input("choose an option: ")
 
         if choice == '1':
-            task: str = input("enter task description: ")
-            tasks.append(task)
-            print(f"added: {task}")
+            task: str = input("enter task description: ").strip()
+            if task:
+                tasks.append(task)
+                print(f"added: {task}")
+            else:
+                print("error: task description cannot be empty!")
         elif choice == '2':
             if not tasks:
                 print("the list is empty.")
