@@ -1,0 +1,30 @@
+PS C:\Users\alexr\Desktop\Facultate\PregatIT Python\week1\src\final_assignment> pytest --cov=. --cov-report=term-missing
+=================================================================================== test session starts ===================================================================================
+platform win32 -- Python 3.12.9, pytest-7.4.3, pluggy-1.6.0
+rootdir: C:\Users\alexr\Desktop\Facultate\PregatIT Python\week1\src\final_assignment
+plugins: anyio-3.7.1, cov-4.1.0
+collected 8 items
+
+tests\test_api.py ........                                                                                                                                                           [100%]
+
+==================================================================================== warnings summary =====================================================================================
+..\..\..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:690
+  C:\Users\alexr\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:690: DeprecationWarning: The 'app' shortcut is now deprecated. Use the explicit style 'transport=WSGITransport(app=...)' instead.
+    warnings.warn(message, DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+
+---------- coverage: platform win32, python 3.12.9-final-0 -----------
+Name                   Stmts   Miss  Cover   Missing
+----------------------------------------------------
+api.py                    56      6    89%   13-14, 25, 29, 38, 57
+custom_exceptions.py       4      0   100%
+db_handler.py             17      4    76%   24-37
+schemas.py                20      0   100%
+task_system.py            86      9    90%   62, 80, 83, 98-99, 101-102, 106, 124
+tests\__init__.py          0      0   100%
+tests\test_api.py         47      0   100%
+----------------------------------------------------
+TOTAL                    230     19    92%
+
+============================================================================== 8 passed, 1 warning in 4.76s ==============================================================================
